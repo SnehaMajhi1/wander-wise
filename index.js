@@ -9,6 +9,9 @@ import connectDB from './config/database.js'; // import connectDB function from 
 // import dotenv from 'dotenv';
 // dotenv.config(); -> old approach to load .env variables
 
+import HANDLERS from './handlers/index.js';
+import errorMiddleware from './middleware/error.js';
+import { authMiddleware } from './middleware/auth.js';
 
 const app = express();
 const port = process.env.PORT; //kei value access garnu cha vaney this is the way to access environment 
@@ -29,8 +32,17 @@ const helloWorldNew = (req, res) => {
 //     res.send('Hello World!');
 // });
 
-app.get('/', helloWorldNew);
+// app.get('/', helloWorldNew);
+
+
 connectDB();
+
+app.use(express.json()); 
+app.use(authMiddleware);
+app.use("/", HANDLERS);
+app.use(errorMiddleware);
+
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });

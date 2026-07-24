@@ -1,0 +1,72 @@
+@baseURL = http://localhost:3000
+
+@userId = 6a43aec678b04f656fc497fe
+
+@token = 
+
+
+### TEST API
+GET {{baseURL}}
+
+### CREATE USER
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "test123"
+}  
+
+### GET ALL USERS
+GET {{baseURL}}/users
+
+### GET USER BY ID
+GET {{baseURL}}/users/{{userId}}
+
+### UPDATE USER BY ID
+PATCH {{baseURL}}/users/{{userId}}
+Content-Type: application/json
+
+{
+    "name": "John Doe Updated",
+
+}
+
+### DELETE USER BY ID
+DELETE {{baseURL}}/users/{{userId}}
+
+### REGISTER USER
+POST {{baseURL}}/auth/register
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "password": "test123"
+}
+
+### LOGIN USER
+POST {{baseURL}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "jane.doe@example.com",
+    "password": "test123"
+}
+
+### CREATE TRIP
+POST {{baseURL}}/trips
+Content-Type: application/json
+
+{
+    "title": "Trip to the moon",
+    "startDate": "2025-12-15",
+    "endDate": "2025-12-16",
+    "budget": {
+        "total": 1000
+    },
+    "destination": ["Moon", "Mars", "Jupiter"]
+    
+}

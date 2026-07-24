@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose"
 import { hash } from "bcrypt";
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
     {
         name: {
             type: String,
@@ -9,7 +9,7 @@ const userSchema = new Schema(
             trim: true,
         },
         email: {
-            type: String,
+            type: String, 
             required: true,
             unique: true,
             lowercase: true,
@@ -34,18 +34,19 @@ const userSchema = new Schema(
 
 UserSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
-        this.password = await hash(this.password,10);
+        this.password = await hash(this.password, 10);
     }
 });
 
 //Ensure password is hashed on update operations as well
 UserSchema.pre("findOneAndUpdate", async function (next) {
-    if (this.update.password) {
-        this.update.password = await hash(this.update.password, 10);
+      const updatedData = this.getUpdate();
+    if (updatedData.password) {
+        updatedData.password = await hash(updatedData.password, 10);
     }
 });
 
-const User = model("User", userSchema);
+const User = model("User", UserSchema);
 
 export default User;
 
