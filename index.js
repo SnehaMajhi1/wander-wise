@@ -10,8 +10,8 @@ import connectDB from './config/database.js'; // import connectDB function from 
 // dotenv.config(); -> old approach to load .env variables
 
 import HANDLERS from './handlers/index.js';
-import errorMiddleware from './middleware/error.js';
-import { authMiddleware } from './middleware/auth.js';
+import errorMiddleware from './middlewares/error.js';
+import { authMiddleware } from './middlewares/auth.js';
 
 const app = express();
 const port = process.env.PORT; //kei value access garnu cha vaney this is the way to access environment 
