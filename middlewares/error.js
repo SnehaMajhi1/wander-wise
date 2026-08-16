@@ -3,7 +3,7 @@ const errorMiddleware = async (err, req, res, next) => {
     res.status(statusCode).json({
         success: false,
         message: err.message || "Something went wrong",
-        stack: process.env.Node_ENV !== "production" ? err.stack : null,
+        stack: process.env.NODE_ENV !== "production" ? err.stack : null,
         ...(err.errors?.length > 0 && { 
             errors: err.errors.map((error) => ({
                 field: error.path,

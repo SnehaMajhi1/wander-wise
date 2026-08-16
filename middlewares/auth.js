@@ -8,8 +8,11 @@ export const authMiddleware = (req, res, next) => {
 
     }
     console.log(req.headers.authorization);
-    const [type, token] = req.headers.authorization?.split(" ") || [];
+    
+    const [type, token] =
+       req.headers.authorization?.split(" ") || [];
     console.log(type, token);
+
    if (!token || type !== "Bearer") {
     return res.status(401).json({ message: "Unauthorized" });
   }
